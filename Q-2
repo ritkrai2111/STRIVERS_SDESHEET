@@ -1,0 +1,54 @@
+class Solution {
+    public static int comb(int n,int r){
+        int res=1;
+        for(int i=0;i<r;i++){
+            res=res*(n-i);
+            res=res/(i+1);
+            
+        }
+        return res;
+    }
+    //brute force approach n cube using combination method
+    public static List<List<Integer>> brute(int numRows) {
+        List<List<Integer>> ans=new ArrayList<>();
+        for(int i=1;i<=numRows;i++){
+            List<Integer> temp=new ArrayList<>();
+            for(int j=1;j<=i;j++){
+                int getcomb=comb(i-1,j-1);
+                temp.add(getcomb);
+
+            }
+            ans.add(temp);
+        }
+        return ans;
+    }
+    public List<List<Integer>> optimal(int numRows) {
+        List<List<Integer>> ans=new ArrayList<>();
+        for(int i=1;i<=numRows;i++){
+            List<Integer> l=nthlevel(i);
+            ans.add(l);
+
+        }
+        
+        return ans;
+    }
+    //return nth level function
+    public static List<Integer> nthlevel(int n){
+        List<Integer> res=new ArrayList<>();
+        int ans=1;
+        res.add(ans);
+        for(int i=1;i<n;i++){
+            ans=ans*(n-i);
+            ans=ans/i;
+            res.add(ans);
+        }
+        return res;
+    }
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ans=optimal(numRows);
+        
+        return ans;
+        
+        
+    }
+}
