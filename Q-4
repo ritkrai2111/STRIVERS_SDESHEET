@@ -1,0 +1,40 @@
+class Solution {
+    public static int brute(int [] nums){
+        //in this we will find all the possible sub-arrays and their sum and return the maximum one
+        int maxsum=0;
+        for(int i=0;i<nums.length;i++){
+            for(int j=i;j<nums.length;j++){
+                //to sum all from starting to 
+                int sum=0;
+                for(int k=i;k<=j;k++){
+                    sum=sum+nums[k];
+
+                }
+                maxsum=Math.max(sum,maxsum);
+            }
+        }
+        return maxsum;
+    
+    }
+    public static int kadane(int [] nums){
+        //if sumofsubaarray becomes less then 0 then it is of no good use
+        int currsum=0;
+        int maxsum=0;
+        for(int i=0;i<nums.length;i++){
+            currsum=currsum+nums[i];
+            if(currsum>maxsum){
+                maxsum=currsum;
+            }
+            if(currsum<0){
+                currsum=0;
+            }
+        }
+        return maxsum;
+    }
+   
+    
+    public int maxSubArray(int[] nums) {
+        int ans=kadane(nums);
+        return ans;
+       
+    }
