@@ -1,0 +1,45 @@
+class Solution {
+    public static void brute(int [][] arr){
+        int ans[][]=new int[arr.length][arr[0].length];
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                ans[i][j]=arr[arr.length-j-1][i];
+            }
+        }
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                arr[i][j]=ans[i][j];
+            }
+        }
+
+    }
+
+    public void rotate(int[][] matrix) {
+        
+
+        //first transpose
+        for(int i=0;i<matrix.length;i++){
+            for(int j=i;j<matrix[0].length;j++){
+                int temp=matrix[i][j];
+                matrix[i][j]=matrix[j][i];
+                matrix[j][i]=temp;
+            }
+        }
+        //reverse the rows
+        for(int i=0;i<matrix.length;i++){
+            int a=0;
+            int b=matrix[0].length-1;
+            while(b>a){
+                int dummy=matrix[i][a];
+                matrix[i][a]=matrix[i][b];
+                matrix[i][b]=dummy;
+                a++;
+                b--;
+            }
+        }
+
+
+
+        
+    }
+}
