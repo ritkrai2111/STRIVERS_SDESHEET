@@ -1,0 +1,74 @@
+class Solution {
+    public static void merge(int [] arr,int low,int mid,int high){
+        int i=low;
+        int j=mid+1;
+        ArrayList<Integer> al=new ArrayList<>();
+        int k=low;
+        while(i<=mid && j<=high){
+            if(arr[i]<=arr[j]){
+                al.add(arr[i]);
+                i++;
+            }
+            else{
+                al.add(arr[j]);
+                j++;
+            }
+            k++;
+        }
+        while(i<=mid){
+            al.add(arr[i]);
+            i++;
+            k++;
+
+        }
+        while(j<=high){
+            al.add(arr[j]);
+            j++;
+            k++;
+        }
+        int b=0;
+        for(int a=low;a<=high;a++){
+            arr[a]=al.get(b);
+            b++;
+        }
+    }
+    public static void mergesort(int [] arr,int low,int high){
+        if(low>=high){
+            return;
+        }
+        int mid=(low+high)/2;
+        mergesort(arr,low,mid);
+        mergesort(arr,mid+1,high);
+        merge(arr,low,mid,high);
+
+    }
+    public void sortColors(int[] nums) {
+        //normal sorting will at best take nlog(n)
+        //let's try the dutch flag algorithm
+        int low=0;
+        int mid=0;
+        int high=nums.length-1;
+        while(high>=mid){
+            if(nums[mid]==0){
+                int temp=nums[low];
+                nums[low]=nums[mid];
+                nums[mid]=temp;
+                low++;mid++;
+
+
+            }
+            else if(nums[mid]==1){
+                mid++;
+            }
+            else{
+                int dummy=nums[high];
+                nums[high]=nums[mid];
+                nums[mid]=dummy;
+                high--;
+
+            }
+
+        }
+       
+}
+}
